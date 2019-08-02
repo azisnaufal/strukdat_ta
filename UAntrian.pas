@@ -16,7 +16,7 @@ var
   pilihan: integer;
 
 //RUANG KERJA ALIF ↓↓
-yusupp 
+yusupp blm mandiii
 
 //RUANG KERJA YUSUP ↓↓
 
