@@ -16,7 +16,10 @@ var
   pilihan: integer;
 
 //RUANG KERJA ALIF ↓↓
-SSSSS
+procedure MyProcedure(params;
+begin
+  
+end;
 
 //RUANG KERJA YUSUP ↓↓
 
