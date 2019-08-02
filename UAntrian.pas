@@ -16,7 +16,7 @@ var
   pilihan: integer;
 
 //RUANG KERJA ALIF ↓↓
-
+SSSSS
 
 //RUANG KERJA YUSUP ↓↓
 
