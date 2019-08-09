@@ -1,5 +1,5 @@
 program UAntrian;
-
+uses crt;
 type
   TInfo = record
     antrian : String[8];
@@ -17,9 +17,18 @@ var
   banyak_data : integer;
 
 //RUANG KERJA ALIF ↓↓
-procedure MyProcedure(params;
-begin
-  
+procedure sisip_belakang( i:String; var awal, akhir:PData );
+var
+  baru:PData;
+  begin
+      new(baru);
+      baru^.antrian :=i;
+      baru^.next:=nil;
+      if (awal=nil) then
+          awal:=baru
+      else  
+          akhir^.next:=baru;
+          akhir:=baru;
 end;
 
 //RUANG KERJA YUSUP ↓↓
