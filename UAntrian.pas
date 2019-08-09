@@ -27,8 +27,8 @@ var
       if (awal=nil) then
           awal:=baru
       else  
-          akhir^.next:=baru;
-          akhir:=baru;
+        akhir^.next:=baru;
+        akhir:=baru;
 end;
 
 //RUANG KERJA YUSUP ↓↓
