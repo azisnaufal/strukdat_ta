@@ -141,6 +141,8 @@ end;
 
 //MAIN FUNCTION ↓↓
 begin
+  sisip_belakang('coba',awal,akhir);
+  writlen(awal^.info.antrian);
   banyak_data := 0;
   
 end.
