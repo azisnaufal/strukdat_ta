@@ -22,7 +22,7 @@ var
   baru:PData;
   begin
       new(baru);
-      baru^.antrian :=i;
+      baru^.info.antrian :=i;
       baru^.next:=nil;
       if (awal=nil) then
           awal:=baru
@@ -40,7 +40,7 @@ end;
 function apakahDaun(nomor_simpul : integer) : boolean;
 begin
   if (nomor_simpul >= (banyak_data div 2)) and (nomor_simpul <= banyak_data) then
-    apakahDaun := true;
+    apakahDaun := true
   else 
     apakahDaun := false;
 end;
@@ -64,7 +64,7 @@ begin
 end;
 
 //fungsi ini untuk mencari data pada posisi ke n (dibuat oleh azis)
-function ambilNilaiDariHeap(n : integer) : TInfo;
+function ambilNilaiDariHeap(n : integer) : PData;
 var 
   bantu : PData;
   posisi : integer;
@@ -79,30 +79,27 @@ begin
   ambilNilaiDariHeap := bantu;
 end;
 
-//prosedur ini dipanggil ketika ada penambahan data (dibuat oleh azis)
-procedure geser_ke_atas() 
-var
-  nomor_simpul : integer;
-  info : TInfo;
-begin
-  nomor_simpul := banyak_data;
-  while(nomor_simpul > 1) and (ambilNilaiDariHeap(orangTua(nomor_simpul)),antrian > ambilNilaiDariHeap(nomor_simpul).antrian ) do
-  begin
-    info := ambilNilaiDariHeap(nomor_simpul);
-    ambilNilaiDariHeap(nomor_simpul) := ambilNilaiDariHeap(orangTua(nomor_simpul));
-    ambilNilaiDariHeap(orangTua(nomor_simpul)) := info;
-    nomor_simpul := orangTua(nomor_simpul);
-  end;
-end;
-
 //prosedur ini dipanggil untuk menukar data dalam heap
 procedure tukar(nomor_simpul1:integer;nomor_simpul2:integer);
 var
   temp:TInfo;
 begin
-   temp:=ambilNilaiDariHeap(nomor_simpul1);
-   ambilNilaiDariHeap(nomor_simpul1):=ambilNilaiDariHeap(nomor_simpul2);
-   ambilNilaiDariHeap(nomor_simpul2):=temp;
+   temp := ambilNilaiDariHeap(nomor_simpul1)^.info;
+   ambilNilaiDariHeap(nomor_simpul1)^.info := ambilNilaiDariHeap(nomor_simpul2)^.info;
+   ambilNilaiDariHeap(nomor_simpul2)^.info := temp;
+end;
+
+//prosedur ini dipanggil ketika ada penambahan data (dibuat oleh azis)
+procedure geser_ke_atas() ;
+var
+  nomor_simpul : integer;
+begin
+  nomor_simpul := banyak_data;
+  while(nomor_simpul > 1) and ( ambilNilaiDariHeap(orangTua(nomor_simpul))^.info.antrian > ambilNilaiDariHeap(nomor_simpul)^.info.antrian ) do
+  begin
+    tukar(nomor_simpul, orangTua(nomor_simpul));
+    nomor_simpul := orangTua(nomor_simpul);
+  end;
 end;
 
 //prosedur ini dipanggil oleh prosedur reorganisasi untuk membuat ulang heap (dibuat oleh azis)
@@ -110,9 +107,9 @@ procedure buatHeap(nomor_simpul : integer);
 begin
   if not apakahDaun(nomor_simpul) then
   begin
-    if (ambilNilaiDariHeap(nomor_simpul).antrian > ambilNilaiDariHeap(anakKiri(nomor_simpul)).antrian) or (ambilNilaiDariHeap(nomor_simpul).antrian > ambilNilaiDariHeap(anakKanan(nomor_simpul)).antrian) then
+    if (ambilNilaiDariHeap(nomor_simpul)^.info.antrian > ambilNilaiDariHeap(anakKiri(nomor_simpul))^.info.antrian) or (ambilNilaiDariHeap(nomor_simpul)^.info.antrian > ambilNilaiDariHeap(anakKanan(nomor_simpul))^.info.antrian) then
     begin
-      if (ambilNilaiDariHeap(anakKiri(nomor_simpul)).antrian < ambilNilaiDariHeap(anakKanan(nomor_simpul)).antrian ) then
+      if (ambilNilaiDariHeap(anakKiri(nomor_simpul))^.info.antrian < ambilNilaiDariHeap(anakKanan(nomor_simpul))^.info.antrian ) then
       begin
         tukar(nomor_simpul, anakKiri(nomor_simpul));
         buatHeap(anakKiri(nomor_simpul));
@@ -131,7 +128,7 @@ procedure reorganisasi;
 var
   nomor_simpul : integer;
 begin
-  nomor_simpul = orangTua(banyak_data);
+  nomor_simpul := orangTua(banyak_data);
   while (nomor_simpul >= 1) do 
   begin
     buatHeap(nomor_simpul);
@@ -142,7 +139,7 @@ end;
 //MAIN FUNCTION ↓↓
 begin
   sisip_belakang('coba',awal,akhir);
-  writlen(awal^.info.antrian);
+  writeln(awal^.info.antrian);
   banyak_data := 0;
   
 end.
