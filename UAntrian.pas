@@ -14,12 +14,23 @@ type
 var
   awal, akhir: PData;
   pilihan: integer;
+  nomor_antrian_meja_1 : TInfo;
+  nomor_antrian_meja_2 : TInfo;
   banyak_data : integer;
 
 //RUANG KERJA ALIF ↓↓
-procedure MyProcedure(params;
-begin
-  
+procedure sisip_belakang( i:String; var awal, akhir:PData );
+var
+  baru:PData;
+  begin
+      new(baru);
+      baru^.info.antrian :=i;
+      baru^.next:=nil;
+      if (awal=nil) then
+          awal:=baru
+      else  
+        akhir^.next:=baru;
+        akhir:=baru;
 end;
 
 //RUANG KERJA YUSUP ↓↓
@@ -27,11 +38,11 @@ end;
 
 //RUANG KERJA AZIS ↓↓
 
-//fungsi ini dipanggil untuk mengecek apakah nomor simpul merupakan daun (leaf) atau bukan
+//fungsi ini dipanggil untuk mengecek apakah nomor simpul merupakan daun (leaf) atau bukan (dibuat oleh azis)
 function apakahDaun(nomor_simpul : integer) : boolean;
 begin
   if (nomor_simpul >= (banyak_data div 2)) and (nomor_simpul <= banyak_data) then
-    apakahDaun := true;
+    apakahDaun := true
   else 
     apakahDaun := false;
 end;
@@ -125,6 +136,46 @@ begin
     buatHeap(nomor_simpul);
     nomor_simpul := nomor_simpul - 1;
   end;
+end;
+
+//hapus antrian
+function hapus_antrian() : TInfo;
+var
+  pHapus : PData;
+  info : TInfo;
+begin
+  info : awal^.info;
+  if (awal = akhir) then
+  begin
+    Dispose(awal);
+    awal := nil;
+    akhir := nil;
+  end
+  else
+  begin
+    pHapus := awal;
+    awal := awal^.Next;
+    Dispose(pHapus);
+  end;
+  hapus_antrian := info;
+end;
+
+function tampilMenu() : integer;
+var
+  pilihan : integer;
+begin
+    ClrScr;
+    WriteLn('======= Aplikasi Antrian Bank Masyarakat UNIKOM =======');
+    WriteLn('Meja 1 sedang melayani nomor antrian : ', nomor_antrian_meja_1.antrian);
+    WriteLn('Meja 2 sedang melayani nomor antrian : ', nomor_antrian_meja_2.antrian);
+    WriteLn('Nomor antrian selanjutnya : ', awal^.info.antrian);
+    WriteLn('1. Ambil nomor antrian bisnis');
+    WriteLn('2. Ambil nomor antrian personal');
+    WriteLn('3. Panggil nomor antrian ke meja 1');
+    WriteLn('4. Panggil nomor antrian ke meja 2');
+    WriteLn('5. Keluar aplikasi');
+    ReadLn(pilihan);
+    tampilMenu := pilihan;
 end;
 
 //MAIN FUNCTION ↓↓
