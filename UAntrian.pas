@@ -34,6 +34,8 @@ var
 end;
 
 //RUANG KERJA YUSUP ↓↓
+//baru nambahin audio 
+//function suara()
 
 
 //RUANG KERJA AZIS ↓↓
