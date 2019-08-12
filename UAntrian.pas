@@ -14,6 +14,7 @@ type
 var
   awal, akhir: PData;
   pilihan: integer;
+  penghitung : integer;
   nomor_antrian_meja_1 : TInfo;
   nomor_antrian_meja_2 : TInfo;
   banyak_data : integer;
@@ -32,6 +33,34 @@ var
       else  
         akhir^.next:=baru;
         akhir:=baru;
+end;
+
+procedure ambilAntrianBisnis();
+var
+  info : TInfo;
+begin
+  ClrScr;
+  penghitung := penghitung + 1;
+  info.antrian := 'B'+IntToStr(penghitung));
+  sisip_belakang(info.antrian, awal, akhir);
+  geser_ke_atas;
+  WriteLn('Nomor antrian anda : ', info.antrian);
+  WriteLn('Tekan enter untuk melanjutkan.');
+  readln();
+end;
+
+procedure ambilAntrianPersonal();
+var
+  info : TInfo;
+begin
+  ClrScr;
+  penghitung := penghitung + 1;
+  info.antrian := 'P'+IntToStr(penghitung));
+  sisip_belakang(info.antrian, awal, akhir);
+  geser_ke_atas;
+  WriteLn('Nomor antrian anda : ', info.antrian);
+  WriteLn('Tekan enter untuk melanjutkan.');
+  readln();
 end;
 
 //RUANG KERJA AZIS ↓↓
@@ -248,6 +277,7 @@ begin
     WriteLn('3. Panggil nomor antrian ke meja 1');
     WriteLn('4. Panggil nomor antrian ke meja 2');
     WriteLn('5. Keluar aplikasi');
+    Write('Pilihan anda : ');
     ReadLn(pilihan);
     tampilMenu := pilihan;
 end;
@@ -255,11 +285,17 @@ end;
 //MAIN FUNCTION ↓↓
 begin
   banyak_data := 0;
+  // inisialisasi linked list
+  awal := nil;
+  akhir := nil;
+  // memberikan tanda '-' pada antrian kosong
+  nomor_antrian_meja_1.antrian := '-';
+  nomor_antrian_meja_2.antrian := '-';
   repeat
     pilihan := tampilMenu();
     case(pilihan) of 
-      //1 : ambilAntrianBisnis;
-      //2 : ambilAntrianPersonal;
+      1 : ambilAntrianBisnis;
+      2 : ambilAntrianPersonal;
       3 : panggilKeMeja1;
       4 : panggilKeMeja2;
     end;
