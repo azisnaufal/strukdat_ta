@@ -140,6 +140,7 @@ begin
     awal := awal^.Next;
     Dispose(pHapus);
   end;
+  banyak_data := banyak_data - 1;
   hapus_antrian := info;
 end;
 
@@ -164,9 +165,10 @@ var
 begin
   ClrScr;
   penghitung := penghitung + 1;
+  banyak_data := banyak_data + 1;
   info.antrian := 'B'+IntToStr(penghitung);
   sisip_belakang(info.antrian, awal, akhir);
-  geser_ke_atas;
+  geser_ke_atas();
   WriteLn('Nomor antrian anda : ', info.antrian);
   WriteLn('Tekan enter untuk melanjutkan.');
   readln();
@@ -178,9 +180,10 @@ var
 begin
   ClrScr;
   penghitung := penghitung + 1;
+  banyak_data := banyak_data + 1;
   info.antrian := 'P'+IntToStr(penghitung);
   sisip_belakang(info.antrian, awal, akhir);
-  geser_ke_atas;
+  geser_ke_atas();
   WriteLn('Nomor antrian anda : ', info.antrian);
   WriteLn('Tekan enter untuk melanjutkan.');
   readln();
