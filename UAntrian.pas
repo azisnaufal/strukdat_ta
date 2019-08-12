@@ -1,5 +1,5 @@
 program UAntrian;
-uses crt, mmsystem;
+uses crt, mmsystem, sysutils;
 type
   TInfo = record
     antrian : String[8];
@@ -18,50 +18,6 @@ var
   nomor_antrian_meja_1 : TInfo;
   nomor_antrian_meja_2 : TInfo;
   banyak_data : integer;
-
-
-//RUANG KERJA ALIF ↓↓
-procedure sisip_belakang( i:String; var awal, akhir:PData );
-var
-  baru:PData;
-  begin
-      new(baru);
-      baru^.info.antrian :=i;
-      baru^.next:=nil;
-      if (awal=nil) then
-          awal:=baru
-      else  
-        akhir^.next:=baru;
-        akhir:=baru;
-end;
-
-procedure ambilAntrianBisnis();
-var
-  info : TInfo;
-begin
-  ClrScr;
-  penghitung := penghitung + 1;
-  info.antrian := 'B'+IntToStr(penghitung));
-  sisip_belakang(info.antrian, awal, akhir);
-  geser_ke_atas;
-  WriteLn('Nomor antrian anda : ', info.antrian);
-  WriteLn('Tekan enter untuk melanjutkan.');
-  readln();
-end;
-
-procedure ambilAntrianPersonal();
-var
-  info : TInfo;
-begin
-  ClrScr;
-  penghitung := penghitung + 1;
-  info.antrian := 'P'+IntToStr(penghitung));
-  sisip_belakang(info.antrian, awal, akhir);
-  geser_ke_atas;
-  WriteLn('Nomor antrian anda : ', info.antrian);
-  WriteLn('Tekan enter untuk melanjutkan.');
-  readln();
-end;
 
 //RUANG KERJA AZIS ↓↓
 
@@ -187,6 +143,48 @@ begin
   hapus_antrian := info;
 end;
 
+//RUANG KERJA ALIF ↓↓
+procedure sisip_belakang( i:String; var awal, akhir:PData );
+var
+  baru:PData;
+  begin
+      new(baru);
+      baru^.info.antrian :=i;
+      baru^.next:=nil;
+      if (awal=nil) then
+          awal:=baru
+      else  
+        akhir^.next:=baru;
+        akhir:=baru;
+end;
+
+procedure ambilAntrianBisnis();
+var
+  info : TInfo;
+begin
+  ClrScr;
+  penghitung := penghitung + 1;
+  info.antrian := 'B'+IntToStr(penghitung);
+  sisip_belakang(info.antrian, awal, akhir);
+  geser_ke_atas;
+  WriteLn('Nomor antrian anda : ', info.antrian);
+  WriteLn('Tekan enter untuk melanjutkan.');
+  readln();
+end;
+
+procedure ambilAntrianPersonal();
+var
+  info : TInfo;
+begin
+  ClrScr;
+  penghitung := penghitung + 1;
+  info.antrian := 'P'+IntToStr(penghitung);
+  sisip_belakang(info.antrian, awal, akhir);
+  geser_ke_atas;
+  WriteLn('Nomor antrian anda : ', info.antrian);
+  WriteLn('Tekan enter untuk melanjutkan.');
+  readln();
+end;
 
 //RUANG KERJA YUSUP ↓↓
 function apakahkosong():boolean;
