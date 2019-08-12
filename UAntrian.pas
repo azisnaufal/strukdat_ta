@@ -190,6 +190,7 @@ begin
 end;
 
 //RUANG KERJA YUSUP ↓↓
+//function ini untuk mengecek apakah antrian kosong apa tidak, oleeh Yusuf
 function apakahkosong():boolean;
 begin
   if awal = nil then
@@ -198,7 +199,7 @@ begin
     apakahkosong := false;
 end;
 
-//baru nambahin audio 
+//prosedur ini digunakan untuk memamnggil antrian di meja 1, oleeh Yusuf
 procedure panggilKeMeja1();
 var 
   i : integer;
@@ -231,7 +232,7 @@ begin
     ReadLn();
 end;
 
-
+//prosedur ini digunakan untuk memamnggil antrian di meja 2, oleeh Yusuf
 procedure panggilKeMeja2();
 var 
   i : integer;
