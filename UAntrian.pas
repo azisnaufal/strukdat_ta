@@ -242,7 +242,7 @@ begin
     WriteLn('======= Aplikasi Antrian Bank Masyarakat UNIKOM =======');
     WriteLn('Meja 1 sedang melayani nomor antrian : ', nomor_antrian_meja_1.antrian);
     WriteLn('Meja 2 sedang melayani nomor antrian : ', nomor_antrian_meja_2.antrian);
-    WriteLn('Nomor antrian selanjutnya : ', awal^.info.antrian);
+    if (awal <> nil) then WriteLn('Nomor antrian selanjutnya : ', awal^.info.antrian);
     WriteLn('1. Ambil nomor antrian bisnis');
     WriteLn('2. Ambil nomor antrian personal');
     WriteLn('3. Panggil nomor antrian ke meja 1');
