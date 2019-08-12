@@ -142,7 +142,7 @@ var
   pHapus : PData;
   info : TInfo;
 begin
-  info : awal^.info;
+  info := awal^.info;
   if (awal = akhir) then
   begin
     Dispose(awal);
@@ -172,7 +172,7 @@ end;
 procedure panggilKeMeja1();
 var 
   i : integer;
-  namafie : String;
+  namafile : String;
 begin
   ClrScr;
   if apakahkosong = true then
@@ -192,8 +192,8 @@ begin
     
     for i:= 2 to length(nomor_antrian_meja_1.antrian)do 
     begin 
-      namafie:='./voiceaudionumber/'+nomor_antrian_meja_1.antrian[i]+'.wav';
-      playsound(pchar(namafie),0,0);
+      namafile:='./voiceaudionumber/'+nomor_antrian_meja_1.antrian[i]+'.wav';
+      playsound(pchar(namafile),0,0);
     end;
     playsound('./voiceaudionumber/dimeja1.wav',0,0);
     end;
@@ -258,8 +258,8 @@ begin
   repeat
     pilihan := tampilMenu();
     case(pilihan) of 
-      1 : ambilAntrianBisnis;
-      2 : ambilAntrianPersonal;
+      //1 : ambilAntrianBisnis;
+      //2 : ambilAntrianPersonal;
       3 : panggilKeMeja1;
       4 : panggilKeMeja2;
     end;
