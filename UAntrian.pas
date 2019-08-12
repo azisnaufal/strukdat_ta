@@ -1,5 +1,5 @@
 program UAntrian;
-uses crt;
+uses crt, mmsystem;
 type
   TInfo = record
     antrian : String[8];
@@ -18,6 +18,7 @@ var
   nomor_antrian_meja_2 : TInfo;
   banyak_data : integer;
 
+
 //RUANG KERJA ALIF ↓↓
 procedure sisip_belakang( i:String; var awal, akhir:PData );
 var
@@ -32,11 +33,6 @@ var
         akhir^.next:=baru;
         akhir:=baru;
 end;
-
-//RUANG KERJA YUSUP ↓↓
-//baru nambahin audio 
-//function suara()
-
 
 //RUANG KERJA AZIS ↓↓
 
@@ -160,6 +156,82 @@ begin
     Dispose(pHapus);
   end;
   hapus_antrian := info;
+end;
+
+
+//RUANG KERJA YUSUP ↓↓
+function apakahkosong():boolean;
+begin
+  if awal = nil then
+    apakahkosong := true
+    else
+    apakahkosong := false;
+end;
+
+//baru nambahin audio 
+procedure panggilKeMeja1();
+var 
+  i : integer;
+  namafie : String;
+begin
+  ClrScr;
+  if apakahkosong = true then
+  begin
+    WriteLn('Antrian Kosong ');
+  end
+  else
+  begin
+    nomor_antrian_meja_1 := hapus_antrian;
+    reorganisasi;
+    WriteLn('Nomor antrian ',nomor_antrian_meja_1.antrian,' ke meja satu' );
+    playsound('./voiceaudionumber/Nomorantrian.wav',0,0);
+    if nomor_antrian_meja_1.antrian[1]='B' then
+      playsound('./voiceaudionumber/B.wav',0,0)
+    else
+      playsound('./voiceaudionumber/p.wav',0,0);
+    
+    for i:= 2 to length(nomor_antrian_meja_1.antrian)do 
+    begin 
+      namafie:='./voiceaudionumber/'+nomor_antrian_meja_1.antrian[i]+'.wav';
+      playsound(pchar(namafie),0,0);
+    end;
+    playsound('./voiceaudionumber/dimeja1.wav',0,0);
+    end;
+    WriteLn('tekan enter untuk melanjutkan ');
+    ReadLn();
+end;
+
+
+procedure panggilKeMeja2();
+var 
+  i : integer;
+  namafie : String;
+begin
+  ClrScr;
+  if apakahkosong = true then
+  begin
+    WriteLn('Antrian Kosong ');
+  end
+  else
+  begin
+    nomor_antrian_meja_2 := hapus_antrian;
+    reorganisasi;
+    WriteLn('Nomor antrian ',nomor_antrian_meja_2.antrian,' ke meja Dua' );
+    playsound('./voiceaudionumber/Nomorantrian.wav',0,0);
+    if nomor_antrian_meja_2.antrian[1]='B' then
+      playsound('./voiceaudionumber/B.wav',0,0)
+    else
+      playsound('./voiceaudionumber/p.wav',0,0);
+    
+    for i:= 2 to length(nomor_antrian_meja_2.antrian)do 
+    begin 
+      namafie:='./voiceaudionumber/'+nomor_antrian_meja_2.antrian[i]+'.wav';
+      playsound(pchar(namafie),0,0);
+    end;
+    playsound('./voiceaudionumber/dimeja2.wav',0,0);
+    end;
+    WriteLn('tekan enter untuk melanjutkan ');
+    ReadLn();
 end;
 
 function tampilMenu() : integer;
