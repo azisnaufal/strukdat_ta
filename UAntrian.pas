@@ -21,15 +21,6 @@ var
 
 //RUANG KERJA AZIS ↓↓
 
-//fungsi ini dipanggil untuk mengecek apakah nomor simpul merupakan daun (leaf) atau bukan (dibuat oleh azis)
-function apakahDaun(nomor_simpul : integer) : boolean;
-begin
-  if (nomor_simpul >= (banyak_data div 2)) and (nomor_simpul <= banyak_data) then
-    apakahDaun := true
-  else 
-    apakahDaun := false;
-end;
-
 //fungsi ini dipanggil untuk mendapatkan posisi anak kiri dari nomor_simpul (dibuat oleh azis)
 function anakKiri(nomor_simpul : integer): integer;
 begin
@@ -80,7 +71,7 @@ var
   nomor_simpul : integer;
 begin
   nomor_simpul := banyak_data;
-  while(nomor_simpul > 1) and ( ambilNilaiDariHeap(orangTua(nomor_simpul))^.info.antrian < ambilNilaiDariHeap(nomor_simpul)^.info.antrian ) do
+  while(nomor_simpul > 1) and ( ambilNilaiDariHeap(orangTua(nomor_simpul))^.info.antrian > ambilNilaiDariHeap(nomor_simpul)^.info.antrian ) do
   begin
     tukar(nomor_simpul, orangTua(nomor_simpul));
     nomor_simpul := orangTua(nomor_simpul);
@@ -90,22 +81,19 @@ end;
 //prosedur ini dipanggil oleh prosedur reorganisasi untuk membuat ulang heap (dibuat oleh azis)
 procedure buatHeap(nomor_simpul : integer);
 begin
-  if not apakahDaun(nomor_simpul) then
+  if (ambilNilaiDariHeap(nomor_simpul)^.info.antrian > ambilNilaiDariHeap(anakKiri(nomor_simpul))^.info.antrian) or (ambilNilaiDariHeap(nomor_simpul)^.info.antrian > ambilNilaiDariHeap(anakKanan(nomor_simpul))^.info.antrian) then
   begin
-    if (ambilNilaiDariHeap(nomor_simpul)^.info.antrian < ambilNilaiDariHeap(anakKiri(nomor_simpul))^.info.antrian) or (ambilNilaiDariHeap(nomor_simpul)^.info.antrian < ambilNilaiDariHeap(anakKanan(nomor_simpul))^.info.antrian) then
+    if (ambilNilaiDariHeap(anakKiri(nomor_simpul))^.info.antrian < ambilNilaiDariHeap(anakKanan(nomor_simpul))^.info.antrian ) then
     begin
-      if (ambilNilaiDariHeap(anakKiri(nomor_simpul))^.info.antrian < ambilNilaiDariHeap(anakKanan(nomor_simpul))^.info.antrian ) then
-      begin
-        tukar(nomor_simpul, anakKiri(nomor_simpul));
-        buatHeap(anakKiri(nomor_simpul));
-      end
-      else
-      begin
-        tukar(nomor_simpul, anakKanan(nomor_simpul));
-        buatHeap(anakKanan(nomor_simpul));        
-      end;
+      tukar(nomor_simpul, anakKiri(nomor_simpul));
+      buatHeap(anakKiri(nomor_simpul));
+    end
+    else
+    begin
+      tukar(nomor_simpul, anakKanan(nomor_simpul));
+      buatHeap(anakKanan(nomor_simpul));        
     end;
-  end; 
+  end;
 end;
 
 //prosedur ini dipanggil ketika heap rusak (dibuat oleh azis)
