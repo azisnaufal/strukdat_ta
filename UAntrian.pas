@@ -80,7 +80,7 @@ var
   nomor_simpul : integer;
 begin
   nomor_simpul := banyak_data;
-  while(nomor_simpul > 1) and ( ambilNilaiDariHeap(orangTua(nomor_simpul))^.info.antrian > ambilNilaiDariHeap(nomor_simpul)^.info.antrian ) do
+  while(nomor_simpul > 1) and ( ambilNilaiDariHeap(orangTua(nomor_simpul))^.info.antrian < ambilNilaiDariHeap(nomor_simpul)^.info.antrian ) do
   begin
     tukar(nomor_simpul, orangTua(nomor_simpul));
     nomor_simpul := orangTua(nomor_simpul);
@@ -92,7 +92,7 @@ procedure buatHeap(nomor_simpul : integer);
 begin
   if not apakahDaun(nomor_simpul) then
   begin
-    if (ambilNilaiDariHeap(nomor_simpul)^.info.antrian > ambilNilaiDariHeap(anakKiri(nomor_simpul))^.info.antrian) or (ambilNilaiDariHeap(nomor_simpul)^.info.antrian > ambilNilaiDariHeap(anakKanan(nomor_simpul))^.info.antrian) then
+    if (ambilNilaiDariHeap(nomor_simpul)^.info.antrian < ambilNilaiDariHeap(anakKiri(nomor_simpul))^.info.antrian) or (ambilNilaiDariHeap(nomor_simpul)^.info.antrian < ambilNilaiDariHeap(anakKanan(nomor_simpul))^.info.antrian) then
     begin
       if (ambilNilaiDariHeap(anakKiri(nomor_simpul))^.info.antrian < ambilNilaiDariHeap(anakKanan(nomor_simpul))^.info.antrian ) then
       begin
