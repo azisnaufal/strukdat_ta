@@ -257,6 +257,7 @@ begin
     ReadLn();
 end;
 
+//function ini digunak untuk menamplkan menu
 function tampilMenu() : integer;
 var
   pilihan : integer;
