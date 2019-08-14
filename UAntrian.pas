@@ -149,6 +149,7 @@ var
         akhir:=baru;
 end;
 
+//Prosedure ini digunakan untuk ambil antrian baru jenis bisnis
 procedure ambilAntrianBisnis();
 var
   info : TInfo;
@@ -164,6 +165,7 @@ begin
   readln();
 end;
 
+//Prosedure ini digunakan untuk ambil antrian baru personal
 procedure ambilAntrianPersonal();
 var
   info : TInfo;
