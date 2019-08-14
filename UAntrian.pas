@@ -133,6 +133,8 @@ begin
 end;
 
 //RUANG KERJA ALIF ↓↓
+//prosedure sisip_belakang hanya dipanggil oleh prosedure ambilAntrianBisnis dan ambilAntrianPersonal dan hanya buat menyispkan data pada
+//belakang linkedlist
 procedure sisip_belakang( i:String; var awal, akhir:PData );
 var
   baru:PData;
